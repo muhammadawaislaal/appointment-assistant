@@ -4,61 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Samad's Appointment Assistant</title>
-  <meta name="description" content="Samad's smart appointment assistant. Book, cancel, or check availability instantly.">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #7209b7;
+      --secondary: #560bad;
+      --accent: #f72585;
+      --bg: #fdf0f0;
+      --text: #1e1e2f;
+      --glass: rgba(255, 255, 255, 0.2);
+    }
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #b9fbc0, #a0c4ff);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #cdb4db, #ffc8dd, #bde0fe);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      overflow-x: hidden;
     }
 
     .container {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
       padding: 30px;
+      max-width: 600px;
       width: 100%;
-      max-width: 500px;
-      animation: fadeIn 1s ease-in-out;
+      color: var(--text);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      animation: fadeIn 1s ease;
     }
 
     @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
+      from {opacity: 0; transform: translateY(30px);}
       to {opacity: 1; transform: translateY(0);}
     }
 
     h1 {
       text-align: center;
-      color: #2b6cb0;
+      font-size: 2rem;
+      color: var(--primary);
       margin-bottom: 20px;
-      font-size: 26px;
     }
 
     .live-image {
       display: block;
-      width: 130px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
       margin: 0 auto 20px;
-      border-radius: 20px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .live-image:hover {
-      transform: scale(1.05);
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 12px var(--primary);
     }
 
     .chat-box {
-      background: #f0f4f8;
+      background: rgba(255, 255, 255, 0.4);
       border-radius: 12px;
       padding: 15px;
       height: 200px;
@@ -73,201 +82,195 @@
 
     .user {
       text-align: right;
-      font-weight: 600;
-      color: #3182ce;
+      color: var(--primary);
+      font-weight: bold;
     }
 
     .bot {
       text-align: left;
       font-style: italic;
-      color: #4a5568;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
+      color: #333;
     }
 
     label {
-      font-weight: 600;
       display: block;
-      margin-bottom: 5px;
+      font-weight: 600;
+      margin: 10px 0 5px;
     }
 
-    select, input[type="date"], input[type="time"], button {
+    select, input[type="date"], input[type="time"], input[type="text"], button {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       border-radius: 12px;
-      border: 1px solid #cbd5e0;
-      font-size: 15px;
-      background: #f7fafc;
-      transition: border 0.3s ease;
+      border: none;
+      font-size: 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
-    select:focus, input:focus {
-      outline: none;
-      border-color: #4299e1;
+    input, select {
+      background: #fff;
     }
 
     button {
-      background-color: #3182ce;
+      background-color: var(--primary);
       color: white;
       font-weight: bold;
-      margin-top: 10px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: 0.3s;
     }
 
     button:hover {
-      background-color: #2b6cb0;
+      background-color: var(--secondary);
     }
 
     .footer {
       text-align: center;
-      margin-top: 25px;
-      color: #718096;
-      font-size: 14px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: #555;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 600px) {
       .container {
         padding: 20px;
       }
-
       h1 {
-        font-size: 22px;
-      }
-
-      .chat-box {
-        height: 180px;
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d3d5f94c67.mp3?filename=soft-ambient-111832.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+
   <div class="container">
-    <h1>💼 Samad's Appointment Assistant</h1>
+    <h1>✨ Samad's Assistant</h1>
     <img src="https://scontent.flhe17-1.fna.fbcdn.net/v/t39.30808-6/480872827_615021627981296_473206393719982279_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHpcjBxnFA7TbC7CthjPYnTAbPjME7z8uIBs-MwTvPy4nPhaJQ2Vkl8FSKWu00hLaaW6FRNtlhKF2n5QQxOhe2J&_nc_ohc=Wnr9DMj7PEkQ7kNvwEsmWLC&_nc_oc=Adl0fi1ermdjRgOYa5U6UPaKKK2bPARsvWWROIvwjyb6MrbiMxDDmPqGleovJ0JhbJs&_nc_zt=23&_nc_ht=scontent.flhe17-1.fna&_nc_gid=L1VMVPs1mVm09-BgpdwK9Q&oh=00_AfEB65LM250zNdmHJvAbhND3taOHtO6tlUIXFjZ__IxHHw&oe=680AF6EB" 
-         alt="Assistant Avatar" class="live-image" />
+         alt="Samad Image" class="live-image" />
 
     <div class="chat-box" id="chatBox">
-      <div class="message bot">👋 Welcome! Please choose a command.</div>
+      <div class="message bot">👋 Hello! Choose your command below to begin.</div>
     </div>
 
-    <form id="appointmentForm" action="https://formsubmit.co/samad03321997374@gmail.com" method="POST">
-      <div class="form-group">
-        <label for="command">📋 Select a Command:</label>
-        <select id="command" name="command" required>
-          <option value="">Select a command</option>
-          <option>Book Appointment</option>
-          <option>Cancel Appointment</option>
-          <option>Reschedule</option>
-          <option>View Available Slots</option>
-          <option>Today's Appointments</option>
-          <option>Tomorrow's Availability</option>
-          <option>Help</option>
-          <option>Check Availability</option>
-          <option>View Services</option>
-          <option>Location</option>
-        </select>
-      </div>
+    <form id="appointmentForm">
+      <label for="name">🙋 Your Name</label>
+      <input type="text" id="name" name="name" required />
 
-      <div class="form-group">
-        <label for="date">📅 Select Date:</label>
-        <input type="date" id="date" name="date">
-      </div>
+      <label for="command">📋 Choose Command</label>
+      <select id="command" name="command" required>
+        <option value="">-- Select --</option>
+        <option>Book Appointment</option>
+        <option>Cancel Appointment</option>
+        <option>Reschedule</option>
+        <option>View Available Slots</option>
+        <option>Today's Appointments</option>
+        <option>Tomorrow's Availability</option>
+        <option>Help</option>
+        <option>Check Availability</option>
+        <option>View Services</option>
+        <option>Location</option>
+      </select>
 
-      <div class="form-group">
-        <label for="time">⏰ Select Time:</label>
-        <input type="time" id="time" name="time">
-      </div>
+      <label for="date">📅 Date</label>
+      <input type="date" id="date" name="date">
 
-      <!-- Hidden config for FormSubmit -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://thankyou-page.com">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_subject" value="New Appointment Request">
-      <input type="hidden" name="_cc" value="samad03321997374@gmail.com">
+      <label for="time">⏰ Time</label>
+      <input type="time" id="time" name="time">
 
       <button type="submit">🚀 Submit</button>
     </form>
 
     <div class="footer">
-      Created by Samad | Assistant Powered by Samad by 💌
+      Made with ❤️ by Samad • All Rights Reserved
     </div>
   </div>
 
   <script>
-    let commandCount = 0;
-    const chatBox = document.getElementById('chatBox');
-    const form = document.getElementById('appointmentForm');
+    const form = document.getElementById("appointmentForm");
+    const chatBox = document.getElementById("chatBox");
     const availableTimes = ["10:00", "13:00", "15:00", "17:00"];
-
     const responses = {
-      "Cancel Appointment": "❌ Your appointment has been cancelled.",
-      "Reschedule": "🔁 Let's get you a new date and time.",
-      "View Available Slots": "🕒 Available slots: 10 AM, 1 PM, 3 PM, and 5 PM.",
-      "Today's Appointments": "📅 Today’s appointments are fully booked.",
-      "Tomorrow's Availability": "📆 We have availability at 11 AM and 4 PM.",
-      "Help": "📘 Commands: Book, Cancel, Services, etc.",
-      "Check Availability": "📊 Yes! Slots are currently open.",
-      "View Services": "🛠️ We offer consultation, event management, therapy, and hospitality operations.",
+      "Cancel Appointment": "🗑️ Your appointment has been cancelled.",
+      "Reschedule": "🔄 You can now choose a new date and time.",
+      "View Available Slots": "✅ Slots: 10 AM, 1 PM, 3 PM, 5 PM.",
+      "Today's Appointments": "📆 All booked for today!",
+      "Tomorrow's Availability": "🕑 Open at 11 AM & 4 PM tomorrow.",
+      "Help": "🧭 Commands: Book, Cancel, View Slots, etc.",
+      "Check Availability": "📊 Yes, slots are available.",
+      "View Services": "🛠️ Services: Consultation, Events, Therapy, etc.",
       "Location": "📍 Nawa Shaher Choti Zareen."
     };
 
-    function appendMessage(content, sender = "bot") {
+    let commandCount = 0;
+
+    function appendMessage(text, type) {
       const msg = document.createElement("div");
-      msg.className = `message ${sender}`;
-      msg.innerHTML = content;
+      msg.className = `message ${type}`;
+      msg.innerHTML = text;
       chatBox.appendChild(msg);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
 
+      const name = form.name.value.trim().toLowerCase();
       const command = form.command.value;
       const date = form.date.value;
       const time = form.time.value;
 
-      if (!command) {
-        alert("Please select a valid command.");
+      if (!name || !command) {
+        alert("Please enter name and select a command.");
         return;
       }
 
-      appendMessage(`👉 ${command}`, "user");
+      appendMessage(`👉 ${command} by ${name}`, "user");
+
+      const booked = JSON.parse(localStorage.getItem("bookedUsers") || "[]");
 
       let botReply = responses[command] || "";
 
       if (command === "Book Appointment") {
-        if (date && availableTimes.includes(time)) {
-          botReply = `✅ Your appointment has been booked for <strong>${date}</strong> at <strong>${time}</strong>.`;
+        if (booked.includes(name)) {
+          botReply = "⚠️ You can only book one appointment.";
+        } else if (date && availableTimes.includes(time)) {
+          botReply = `✅ Appointment for <strong>${name}</strong> on <strong>${date}</strong> at <strong>${time}</strong> confirmed.`;
+          booked.push(name);
+          localStorage.setItem("bookedUsers", JSON.stringify(booked));
         } else {
-          botReply = "❌ Please select a valid available time slot.";
+          botReply = "⛔ Invalid time slot. Use: 10:00, 13:00, 15:00, or 17:00.";
         }
       }
 
-      commandCount++;
-      if (commandCount >= 10) {
-        botReply += `<br><br>📞 <strong>Contact Samad:</strong><br>📧 samad03321997374@gmail.com<br>📱 +923321997374`;
+      if (++commandCount >= 5) {
+        botReply += `<br><br>📩 Contact Samad: samad03321997374@gmail.com<br>📱 +923321997374`;
         commandCount = 0;
       }
 
       appendMessage(botReply, "bot");
 
-      // Send form using FormSubmit
-      const formData = new FormData();
-      formData.append("Command", command);
-      formData.append("Date", date);
-      formData.append("Time", time);
-      formData.append("Source", "Samad's Appointment Assistant");
+      if (command === "Book Appointment" && !booked.includes(name)) return;
 
-      fetch("https://formsubmit.co/samad03321997374@gmail.com", {
+      fetch("https://formsubmit.co/ajax/samad03321997374@gmail.com", {
         method: "POST",
-        body: formData
-      }).then(res => res.text())
-        .then(data => console.log('📤 Email sent'))
-        .catch(err => console.error('❌ Email error:', err));
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          Name: name,
+          Command: command,
+          Date: date,
+          Time: time,
+          Source: "Samad's Assistant"
+        })
+      })
+      .then(res => res.json())
+      .then(data => console.log("✅ Email sent", data))
+      .catch(err => console.error("❌ Email error", err));
     });
   </script>
 
